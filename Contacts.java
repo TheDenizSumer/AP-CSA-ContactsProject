@@ -1,5 +1,4 @@
 import java.util.*;
-// hello
 
 public class Contacts{
    private static ArrayList<Contacts> contacts = new ArrayList<Contacts>();
