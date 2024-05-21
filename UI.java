@@ -139,13 +139,13 @@ class UI{
                 System.out.println("\nContact Created: "+ contact);
             }
             else if(choice == 3){
-                System.out.println("Here are all of your favorite contacts:");
+                System.out.println("\nHere are all of your favorite contacts:");
                 for(int i = 0; i < Contacts.getFavorites().size(); i++){
                     System.out.println((i+1)+". "+Contacts.getFavorites().get(i));
                 }
             }
             else if(choice == 4){
-                System.out.println("Here are all of your emergency contacts:");
+                System.out.println("\nHere are all of your emergency contacts:");
                 for(int i = 0; i < Contacts.getEmergency().size(); i++){
                     System.out.println((i+1)+". "+Contacts.getEmergency().get(i));
                 }

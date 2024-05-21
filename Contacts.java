@@ -34,20 +34,19 @@ public class Contacts{
    public static ArrayList<Contacts> searchContact(String name){
        ArrayList<Contacts> contactResults = new ArrayList<Contacts>();
        ArrayList<Contacts> sortedContacts = sortContacts(contacts);
-       String word = "";
+       String first = "";
+       String last = "";
        for(int i = 0; i < sortedContacts.size(); i++){
-            for(int letter = 0; letter < sortedContacts.get(i).getFirstName().length()-1; letter++){
-                word += sortedContacts.get(i).getFirstName().toLowerCase().substring(letter, letter+1);
-                System.out.println(word);
-                if(word.equals(name.toLowerCase())){
+            for(int letter = 0; letter < sortedContacts.get(i).getFirstName().length(); letter++){
+                first += sortedContacts.get(i).getFirstName().toLowerCase().substring(letter, letter+1);
+                if(first.equals(name.toLowerCase())){
                     contactResults.add(sortedContacts.get(i));
                     break;
                 }
             }
-            for(int letter = 0; letter < sortedContacts.get(i).getLastName().length()-1; letter++){
-                word += sortedContacts.get(i).getLastName().toLowerCase().substring(letter, letter+1);
-                System.out.println(word);
-                if(word.equals(name.toLowerCase())){
+            for(int letter = 0; letter < sortedContacts.get(i).getLastName().length(); letter++){
+                last += sortedContacts.get(i).getLastName().toLowerCase().substring(letter, letter+1);
+                if(last.equals(name.toLowerCase())){
                     contactResults.add(sortedContacts.get(i));
                     break;
                 }
