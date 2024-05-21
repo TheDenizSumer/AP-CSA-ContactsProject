@@ -2,11 +2,13 @@ import java.util.*;
 
 class UI{
     public static void main(String[] args) {
+        Contacts deniz = new Contacts("Deniz", "Sumer", "911", "deniz@gmail.com", "123 drive lane", true, true, "Hospkta[]");
         boolean exitStatus = false;
-        Scanner scan = new Scanner(System.in);
         int contactNum;
         int choice;
-        System.out.println("Welcome to your Contacts!\n\n");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Welcome to your Contacts!\n");
+        String yn;
         while (!exitStatus){
             System.out.println("\n___________________________________________________\n\n");
             System.out.println("Would you like to:\n1. Create a Contact\n2. Search your Contacts\n3. Look at all Favorites\n4. Look at all Emergency Contacts\nAnything other num to quit\n");
@@ -17,6 +19,7 @@ class UI{
                 System.out.println("Pick the contact by typing associated number");
                 System.out.println("Here are the Search Results:");
                 ArrayList<Contacts> result = Contacts.searchContact(search);
+                Contacts lookedAt;
                 int max;
                 if (result.size() > 5) {
                     max = 5;
@@ -28,72 +31,78 @@ class UI{
                     System.out.println((i+1) + ". " + result.get(i));
                 }
                 System.out.println();
-                contactNum = scan.nextInt();
-                Contacts lookedAt = result.get(contactNum-1);
-                lookedAt.printInfo();
-                System.out.println("\nWould you like to change this contact? (y/n) ");
-                String yn = scan.next();
-                if (yn.equals("y")) {
-                    System.out.println("If you want to change a section, type the updated info, if not just hit enter.");
-                    System.out.println("Enter the new first name of the contact:");
-                    String firstName = scan.nextLine();
-                    System.out.println("Enter the new last name of the contact:");
-                    String lastName = scan.nextLine();
-                    System.out.println("Enter the new phone number of the contact:");
-                    String phone = scan.nextLine();
-                    System.out.println("Enter the new email of the contact:");
-                    String email = scan.nextLine();
-                    System.out.println("Enter the new address of the contact:");
-                    String address = scan.nextLine();
-                    System.out.println("Is this contact a favorite? (true/false)");
-                    String strIsFavorite = scan.nextLine();
-                    boolean isFavorite;
-                    boolean isEmergency;
-                    if (strIsFavorite.toLowerCase().equals("true")){
-                        isFavorite = true;
-                    }
-                    else if(strIsFavorite.toLowerCase().equals("false")){
-                        isFavorite = false;
-                    }
-                    else {
-                        isFavorite = Contacts.getFavorites().contains(lookedAt);
-                    }
-                    System.out.println("Is this contact an emergency contact? (true/false)");
-                    String strIsEmergency = scan.nextLine();
-                    if (strIsEmergency.toLowerCase().equals("true")){
-                        isEmergency = true;
-                    }
-                    else if(strIsEmergency.toLowerCase().equals("false")){
-                        isEmergency = false;
-                    }
-                    else {
-                        isEmergency = Contacts.getEmergency().contains(lookedAt);
-                    }
-                    System.out.println("Enter new the company of the contact:");
-                    String company = scan.nextLine();
-                    lookedAt.setFirstName(firstName);
-                    lookedAt.setLastName(lastName);
-                    lookedAt.setEmail(email);
-                    lookedAt.setPhoneNumber(phone);
-                    lookedAt.setAddress(address);
-                    lookedAt.setCompany(company);
-                    if (isFavorite) {
-                        lookedAt.addToFavorites();
-                    }
-                    else{
-                        lookedAt.removeFavorites();
-                    }
-                    if (isEmergency) {
-                        lookedAt.addToEmergency();
-                    }
-                    else{
-                        lookedAt.removeEmergency();
-                    }
+                if (result.size()==0) {
+                    System.out.println("Search Not Found!");
                 }
-                else{
-                    System.out.println();
-                }
+                else {
+                    contactNum = scan.nextInt();
+                    lookedAt = result.get(contactNum-1);
+                    lookedAt.printInfo();
+                    System.out.println("\nWould you like to change this contact? (y/n) ");
+                    yn = scan.next();
                 
+                    if (yn.equals("y")) {
+                        System.out.println("If you want to change a section, type the updated info, if not just type -.");
+                        System.out.println("Enter the new first name of the contact:");
+                        scan.next();
+                        String firstName = scan.nextLine();
+                        System.out.println("Enter the new last name of the contact:");
+                        String lastName = scan.nextLine();
+                        System.out.println("Enter the new phone number of the contact:");
+                        String phone = scan.nextLine();
+                        System.out.println("Enter the new email of the contact:");
+                        String email = scan.nextLine();
+                        System.out.println("Enter the new address of the contact:");
+                        String address = scan.nextLine();
+                        System.out.println("Is this contact a favorite? (true/false)");
+                        String strIsFavorite = scan.nextLine();
+                        boolean isFavorite;
+                        boolean isEmergency;
+                        if (strIsFavorite.toLowerCase().equals("true")){
+                            isFavorite = true;
+                        }
+                        else if(strIsFavorite.toLowerCase().equals("false")){
+                            isFavorite = false;
+                        }
+                        else {
+                            isFavorite = Contacts.getFavorites().contains(lookedAt);
+                        }
+                        System.out.println("Is this contact an emergency contact? (true/false)");
+                        String strIsEmergency = scan.nextLine();
+                        if (strIsEmergency.toLowerCase().equals("true")){
+                            isEmergency = true;
+                        }
+                        else if(strIsEmergency.toLowerCase().equals("false")){
+                            isEmergency = false;
+                        }
+                        else {
+                            isEmergency = Contacts.getEmergency().contains(lookedAt);
+                        }
+                        System.out.println("Enter new the company of the contact:");
+                        String company = scan.nextLine();
+                        if (!firstName.equals("-")) lookedAt.setFirstName(firstName);
+                        if (!lastName.equals("-")) lookedAt.setLastName(lastName);
+                        if (!email.equals("-")) lookedAt.setEmail(email);
+                        if (!phone.equals("-")) lookedAt.setPhoneNumber(phone);
+                        if (!address.equals("-")) lookedAt.setAddress(address);
+                        if (!company.equals("-")) lookedAt.setCompany(company);
+                        if (isFavorite) {
+                            lookedAt.addToFavorites();
+                        }
+                        else{
+                            lookedAt.removeFavorites();
+                        }
+                        if (isEmergency) {
+                            lookedAt.addToEmergency();
+                        }
+                        else{
+                            lookedAt.removeEmergency();
+                        }
+                    }
+                    else{
+                        System.out.println();
+                    }
+                }
             }
             else if(choice == 1){
                 System.out.println("Enter the first name of the contact:");
@@ -107,6 +116,7 @@ class UI{
                 System.out.println("Enter the address of the contact:");
                 String address = scan.next();
                 System.out.println("Is this contact a favorite? (true/false)");
+                scan.nextLine();
                 String strIsFavorite = scan.next();
                 boolean isFavorite;
                 boolean isEmergency;
@@ -146,11 +156,6 @@ class UI{
                 break;
             }
         }
-        
-        // System.out.println("All Contacts:"+contact1.getContacts());
-        // System.out.println("Favorites:"+contact1.getFavorites());
-        // System.out.println("Emergency Contacts:"+contact1.getEmergency());
-        // ArrayList<Contacts> sortCont = contact1.sortContacts(contact1.getContacts());
-        // System.out.println("Search for 'Adam':"+contact1.searchContact("Adam"));
+        scan.close();
     }
 }

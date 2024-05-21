@@ -35,7 +35,7 @@ public class Contacts{
        ArrayList<Contacts> contactResults = new ArrayList<Contacts>();
        ArrayList<Contacts> sortedContacts = sortContacts(contacts);
        for(int i = 0; i < sortedContacts.size(); i++){
-           if(sortedContacts.get(i).getName().toLowerCase().contains(name.toLowerCase())){
+           if(sortedContacts.get(i).getFirstName().toLowerCase().contains(name.toLowerCase())){
                contactResults.add(sortedContacts.get(i));
            }
        }
@@ -85,8 +85,8 @@ public class Contacts{
 
    public void removeFavorites(){
        isFavorite = false;
-       if (emergency.contains(this))
-           emergency.remove(emergency.indexOf(this));
+       if (favorites.contains(this))
+           favorites.remove(favorites.indexOf(this));
    }
 
    public void removeEmergency(){
