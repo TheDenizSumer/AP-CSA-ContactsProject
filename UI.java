@@ -2,7 +2,6 @@ import java.util.*;
 
 class UI{
     public static void main(String[] args) {
-        Contacts contact1 = new Contacts("Deniz", "Sumer", "67892342234", "balls@gmail.com", "penis DR", true, false, "Balls inc");
         boolean exitStatus = false;
         Scanner scan = new Scanner(System.in);
         int contactNum;
