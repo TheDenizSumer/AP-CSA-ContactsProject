@@ -2,7 +2,6 @@ import java.util.*;
 
 class UI{
     public static void main(String[] args) {
-        Contacts deniz = new Contacts("Deniz", "Sumer", "911", "deniz@gmail.com", "123 drive lane", true, true, "Stripple");
         boolean exitStatus = false;
         int contactNum;
         int choice;
