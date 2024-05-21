@@ -4,11 +4,11 @@ public class Contacts{
    private static ArrayList<Contacts> contacts = new ArrayList<Contacts>();
    private static ArrayList<Contacts> favorites = new ArrayList<Contacts>();
    private static ArrayList<Contacts> emergency = new ArrayList<Contacts>();
-   private String firstName;
-   private String lastName;
-   private String phoneNumber;
-   private String email;
-   private String address;
+   private String firstName = "";
+   private String lastName = "";
+   private String phoneNumber = "";
+   private String email = "";
+   private String address = "";
    private boolean isFavorite;
    private boolean isEmergency;
    private String company;
@@ -36,22 +36,26 @@ public class Contacts{
        ArrayList<Contacts> sortedContacts = sortContacts(contacts);
        for(int i = 0; i < sortedContacts.size(); i++){
            if(sortedContacts.get(i).getName().toLowerCase().contains(name.toLowerCase())){
-               contactResults.add(contacts.get(i));
+               contactResults.add(sortedContacts.get(i));
            }
        }
        return contactResults;
    }
   
-   public static ArrayList<Contacts> sortContacts(ArrayList<Contact> unsorted){
+   public static ArrayList<Contacts> sortContacts(ArrayList<Contacts> unsorted){
        ArrayList<String> sortedNames = new ArrayList<String>();
        ArrayList<Contacts> sortedContacts = new ArrayList<Contacts>();
        for(int i = 0; i < unsorted.size(); i++){
            sortedNames.add(unsorted.get(i).getName());
        }
        Collections.sort(sortedNames);
-       for (int i = 0; i < sortedNames.size(); i++) {
-           sortedContacts.add(sortedNames.indexOf(i));
-       }
+        for(int i = 0; i < sortedNames.size(); i++){
+            for(int j = 0; j < unsorted.size(); j++){
+                if(sortedNames.get(i).equals(unsorted.get(j).getName())){
+                    sortedContacts.add(unsorted.get(j));
+                }
+            }
+        }
        return sortedContacts;
    }
 
@@ -125,34 +129,56 @@ public class Contacts{
        return address;
    }
 
+   public String getCompany(){
+    return company;
+}
+
    public void setFirstName(String newFirstName){
+        if (!newFirstName.equals(""))
        firstName = newFirstName;
    }
    public void setLastName(String newLastName){
+    if (!newLastName.equals(""))
        lastName = newLastName;
    }
   
    public void setPhoneNumber(String newPhoneNumber){
+    if (!newPhoneNumber.equals(""))
        phoneNumber = newPhoneNumber;
    }
 
    public void setEmail(String newEmail){
+    if (!newEmail.equals(""))
        email = newEmail;
    }
 
    public void setAddress(String newAddress){
+    if (!newAddress.equals(""))
        address = newAddress;
    }
 
-   public static void main(String[] args) {
-       Contacts contact1 = new Contacts("Adam", "Appleseed", "9168959021", "adamappleseed@gmail.com", "456 Dinglenut Way", true, true, "Google");
-       Contacts contact2 = new Contacts("Billy", "Bobby", "9167248902", "billybobby@gmail.com", "123 Dinglenut Way", false, false, "Google");
-       Contacts contact3 = new Contacts("Mark", "Cucumberg", "9162323451", "markbigcucumber@gmail.com", "78 Veggie Drive", false, true, "Facebook");
-       Contacts contact4 = new Contacts("Tim", "Cooked", "9169509743", "buyapple@gmail.com", "52 Fruit Drive", true, false, "Apple");
-       System.out.println("All Contacts:"+getContacts());
-       System.out.println("Favorites:"+getFavorites());
-       System.out.println("Emergency Contacts:"+getEmergency());
-        System.out.println("Search for 'Adam':"+searchContact("Adam"));
+   public void setCompany(String newCompany){
+    if (!newCompany.equals(""))
+       company = newCompany;
    }
-}
 
+   public void printInfo(){
+        System.out.print("Name: " + getName() + " ");
+        if (isFavorite) {
+            System.out.print("\n(Favorite!) ");
+        }
+        if (isEmergency) {
+            System.out.print("\n(Emergency Contact!) ");
+        }
+        System.out.println();
+        System.out.println("Phone Number: " + getPhoneNumber());
+        System.out.println("Email: " + getEmail());
+        System.out.println("Address: " + getAddress());
+        System.out.println("Company: " + getCompany());
+        System.out.println();
+   }
+   
+    public String toString(){
+        return getName();
+    }
+}
