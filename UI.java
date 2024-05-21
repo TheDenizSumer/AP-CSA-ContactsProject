@@ -2,7 +2,7 @@ import java.util.*;
 
 class UI{
     public static void main(String[] args) {
-        Contacts deniz = new Contacts("Deniz", "Sumer", "911", "deniz@gmail.com", "123 drive lane", true, true, "Hospkta[]");
+        Contacts deniz = new Contacts("Deniz", "Sumer", "911", "deniz@gmail.com", "123 drive lane", true, true, "Stripple");
         boolean exitStatus = false;
         int contactNum;
         int choice;
@@ -11,12 +11,12 @@ class UI{
         String yn;
         while (!exitStatus){
             System.out.println("\n___________________________________________________\n\n");
-            System.out.println("Would you like to:\n1. Create a Contact\n2. Search your Contacts\n3. Look at all Favorites\n4. Look at all Emergency Contacts\nAnything other num to quit\n");
+            System.out.println("Would you like to:\n1. Create a Contact\n2. Search your Contacts\n3. Look at all Favorites\n4. Look at all Emergency Contacts\nAny other number to quit.\n");
             choice = scan.nextInt();
             if(choice == 2){
-                System.out.println("Enter the name of the contact you would like to search for:");
+                System.out.println("\nEnter the name of the contact you would like to search for:");
                 String search = scan.next();
-                System.out.println("Pick the contact by typing associated number");
+                System.out.println("\nPick the contact by typing associated number");
                 System.out.println("Here are the Search Results:");
                 ArrayList<Contacts> result = Contacts.searchContact(search);
                 Contacts lookedAt;
@@ -27,22 +27,21 @@ class UI{
                 else {
                     max = result.size();
                 }
-                for (int i = 0; i < max; i++) {
-                    System.out.println((i+1) + ". " + result.get(i));
-                }
-                System.out.println();
                 if (result.size()==0) {
                     System.out.println("Search Not Found!");
                 }
                 else {
+                    System.out.println("");
+                    for (int i = 0; i < max; i++) {
+                        System.out.println((i+1) + ". " + result.get(i));
+                    }
                     contactNum = scan.nextInt();
                     lookedAt = result.get(contactNum-1);
                     lookedAt.printInfo();
                     System.out.println("\nWould you like to change this contact? (y/n) ");
                     yn = scan.next();
-                
                     if (yn.equals("y")) {
-                        System.out.println("If you want to change a section, type the updated info, if not just type -.");
+                        System.out.println("\nIf you want to change a section, type the updated info, if not just type -.");
                         System.out.println("Enter the new first name of the contact:");
                         scan.next();
                         String firstName = scan.nextLine();
@@ -137,7 +136,7 @@ class UI{
                 System.out.println("Enter the company of the contact:");
                 String company = scan.next();
                 Contacts contact = new Contacts(firstName, lastName, phone, email, address, isFavorite, isEmergency, company);
-                System.out.println("Contact Created: "+ contact);
+                System.out.println("\nContact Created: "+ contact);
             }
             else if(choice == 3){
                 System.out.println("Here are all of your favorite contacts:");

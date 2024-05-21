@@ -34,10 +34,24 @@ public class Contacts{
    public static ArrayList<Contacts> searchContact(String name){
        ArrayList<Contacts> contactResults = new ArrayList<Contacts>();
        ArrayList<Contacts> sortedContacts = sortContacts(contacts);
+       String word = "";
        for(int i = 0; i < sortedContacts.size(); i++){
-           if(sortedContacts.get(i).getFirstName().toLowerCase().contains(name.toLowerCase())){
-               contactResults.add(sortedContacts.get(i));
-           }
+            for(int letter = 0; letter < sortedContacts.get(i).getFirstName().length()-1; letter++){
+                word += sortedContacts.get(i).getFirstName().toLowerCase().substring(letter, letter+1);
+                System.out.println(word);
+                if(word.equals(name.toLowerCase())){
+                    contactResults.add(sortedContacts.get(i));
+                    break;
+                }
+            }
+            for(int letter = 0; letter < sortedContacts.get(i).getLastName().length()-1; letter++){
+                word += sortedContacts.get(i).getLastName().toLowerCase().substring(letter, letter+1);
+                System.out.println(word);
+                if(word.equals(name.toLowerCase())){
+                    contactResults.add(sortedContacts.get(i));
+                    break;
+                }
+            }
        }
        return contactResults;
    }
