@@ -39,32 +39,15 @@ public class Contacts{
        ArrayList<Contacts> contactResults = new ArrayList<Contacts>();
        //sorting the contacts first before selecting contacts that have names which start with 'name'
        ArrayList<Contacts> sortedContacts = sortContacts(contacts);
-       String first = "";
-       String last = "";
        //for loop to iterate through each object in the sortedContacts arraylist
        for(int i = 0; i < sortedContacts.size(); i++){
-            //for loop to iterate through each letter in the first name of an object
-            for(int letter = 0; letter < sortedContacts.get(i).getFirstName().length(); letter++){
-                //adding the letter to the string value 'first'
-                first += sortedContacts.get(i).getFirstName().toLowerCase().substring(letter, letter+1);
-                //then using the first value and seeing if it is equal to the parameter name
-                /*if it is equal, we add the object to the results arraylist and break out of the loop
-                in order to move on to the next first name. if it isn't equal, we kep iterating through each letter in the name
-                until we find a first name that starts with the parameter name*/
-                if(first.equals(name.toLowerCase())){
-                    contactResults.add(sortedContacts.get(i));
-                    break;
-                }
+            //checking if the start of the first name is the same as the parameter name
+            if (sortedContacts.get(i).getFirstName().substring(0, name.length()).equals(name)) {
+                contactResults.add(sortedContacts.get(i));
             }
-            /*for loop to iterate through each letter in the last name of an object. same functionality as the 
-            above for loop but instead of comparing the parameter 'name' to the beginning of the first name, we compare the parameter
-            'name' to the beginning of last name*/
-            for(int letter = 0; letter < sortedContacts.get(i).getLastName().length(); letter++){
-                last += sortedContacts.get(i).getLastName().toLowerCase().substring(letter, letter+1);
-                if(last.equals(name.toLowerCase())){
-                    contactResults.add(sortedContacts.get(i));
-                    break;
-                }
+            //checking if the start of the last name is the same as the parameter name
+            else if (sortedContacts.get(i).getLastName().substring(0, name.length()).equals(name)) {
+                contactResults.add(sortedContacts.get(i));
             }
        }
        return contactResults;

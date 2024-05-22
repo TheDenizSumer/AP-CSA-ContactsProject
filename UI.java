@@ -18,18 +18,17 @@ class UI{
                 System.out.println("\nPick the contact by typing associated number");
                 System.out.println("Here are the Search Results:");
                 ArrayList<Contacts> result = Contacts.searchContact(search);
+                System.out.println(result);
                 Contacts lookedAt;
                 int max;
                 if (result.size() > 5) {
                     max = 5;
                 }
-                else {
-                    max = result.size();
-                }
-                if (result.size()==0) {
+                else if (result.size()==0) {
                     System.out.println("Search Not Found!");
                 }
                 else {
+                    max = result.size();
                     System.out.println("");
                     for (int i = 0; i < max; i++) {
                         System.out.println((i+1) + ". " + result.get(i));
