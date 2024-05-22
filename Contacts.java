@@ -1,6 +1,8 @@
 import java.util.*;
 
+//Contact class
 public class Contacts{
+    //declaring private instance variables
    private static ArrayList<Contacts> contacts = new ArrayList<Contacts>();
    private static ArrayList<Contacts> favorites = new ArrayList<Contacts>();
    private static ArrayList<Contacts> emergency = new ArrayList<Contacts>();
@@ -14,8 +16,9 @@ public class Contacts{
    private String company;
 
 
-   //constuctor
+   //constructor with all parameters
    public Contacts(String firstName, String lastName, String phoneNumber, String email, String address, boolean isFavorite, boolean isEmergency, String company){
+        //initializing private instance variables with parameters 
        this.firstName = firstName;
        this.lastName = lastName;
        this.phoneNumber = phoneNumber;
@@ -30,20 +33,32 @@ public class Contacts{
 
    }
   
-   // returns a list of contacts that contains the name
+   // returns a list of contacts that starts with the string name
    public static ArrayList<Contacts> searchContact(String name){
+        //creating a results arraylist which will store the result
        ArrayList<Contacts> contactResults = new ArrayList<Contacts>();
+       //sorting the contacts first before selecting contacts that have names which start with 'name'
        ArrayList<Contacts> sortedContacts = sortContacts(contacts);
        String first = "";
        String last = "";
+       //for loop to iterate through each object in the sortedContacts arraylist
        for(int i = 0; i < sortedContacts.size(); i++){
+            //for loop to iterate through each letter in the first name of an object
             for(int letter = 0; letter < sortedContacts.get(i).getFirstName().length(); letter++){
+                //adding the letter to the string value 'first'
                 first += sortedContacts.get(i).getFirstName().toLowerCase().substring(letter, letter+1);
+                //then using the first value and seeing if it is equal to the parameter name
+                /*if it is equal, we add the object to the results arraylist and break out of the loop
+                in order to move on to the next first name. if it isn't equal, we kep iterating through each letter in the name
+                until we find a first name that starts with the parameter name*/
                 if(first.equals(name.toLowerCase())){
                     contactResults.add(sortedContacts.get(i));
                     break;
                 }
             }
+            /*for loop to iterate through each letter in the last name of an object. same functionality as the 
+            above for loop but instead of comparing the parameter 'name' to the beginning of the first name, we compare the parameter
+            'name' to the beginning of last name*/
             for(int letter = 0; letter < sortedContacts.get(i).getLastName().length(); letter++){
                 last += sortedContacts.get(i).getLastName().toLowerCase().substring(letter, letter+1);
                 if(last.equals(name.toLowerCase())){
@@ -55,13 +70,17 @@ public class Contacts{
        return contactResults;
    }
   
+   //returns an arraylist of contacts that are sorted alphabetically by names
    public static ArrayList<Contacts> sortContacts(ArrayList<Contacts> unsorted){
        ArrayList<String> sortedNames = new ArrayList<String>();
        ArrayList<Contacts> sortedContacts = new ArrayList<Contacts>();
+       //adding the name of the objects to an arraylist
        for(int i = 0; i < unsorted.size(); i++){
            sortedNames.add(unsorted.get(i).getName());
        }
+       //sorting the arraylist alphabetically
        Collections.sort(sortedNames);
+       //adding the contacts to an arraylist by order of the contact's name
         for(int i = 0; i < sortedNames.size(); i++){
             for(int j = 0; j < unsorted.size(); j++){
                 if(sortedNames.get(i).equals(unsorted.get(j).getName())){
@@ -72,109 +91,135 @@ public class Contacts{
        return sortedContacts;
    }
 
+   //a method to check if a contact is a favorite contact
    public void favorites(boolean isFavorite){
         if(isFavorite){
             addToFavorites();
         }
    }
 
+   //a method to check if a contact is an emergency contact
    public void emergency(boolean isEmergency){
         if(isEmergency){
             addToEmergency();
         }
    }
 
+   //a method to add the favorite contact to the favorites arraylist
    public void addToFavorites(){
        isFavorite = true;
        if (!favorites.contains(this))
            favorites.add(this);
    }
 
+   //a method to add the emergency contact to the emergency arraylist
    public void addToEmergency(){
        isEmergency = true;
        if (!emergency.contains(this))
            emergency.add(this);
    }
 
+   //a method to remove the favorite contact from the favorites arraylist
    public void removeFavorites(){
        isFavorite = false;
        if (favorites.contains(this))
            favorites.remove(favorites.indexOf(this));
    }
 
+   //a method to remove the emergency contact from the emergency arraylist
    public void removeEmergency(){
        isEmergency = false;
        if (emergency.contains(this))
            emergency.remove(emergency.indexOf(this));
    }
 
+   //returns the contacts arraylist
    public static ArrayList<Contacts> getContacts(){
        return contacts;
    }
 
+   //returns the favorites arraylist
    public static ArrayList<Contacts> getFavorites(){
        return favorites;
    }
 
+   //returns the emergency arraylist
    public static ArrayList<Contacts> getEmergency(){
        return emergency;
    }
 
+   //returns the first name
    public String getFirstName(){
        return firstName;
    }
+
+   //returns the last name
    public String getLastName(){
        return lastName;
    }
+
+   //returns the full name
    public String getName(){
        return firstName + " " + lastName;
    }
 
+   //returns the phone number
    public String getPhoneNumber(){
        return phoneNumber;
    }
 
+   //returns the email
    public String getEmail(){
        return email;
    }
 
+   //returns the address
    public String getAddress(){
        return address;
    }
 
+   //returns the company
    public String getCompany(){
-    return company;
-}
+        return company;
+    }
 
+    //set method for first name
    public void setFirstName(String newFirstName){
         if (!newFirstName.equals(""))
        firstName = newFirstName;
    }
+
+   //set method for last name
    public void setLastName(String newLastName){
     if (!newLastName.equals(""))
        lastName = newLastName;
    }
   
+   //set method for phone number
    public void setPhoneNumber(String newPhoneNumber){
     if (!newPhoneNumber.equals(""))
        phoneNumber = newPhoneNumber;
    }
 
+   //set method for email
    public void setEmail(String newEmail){
     if (!newEmail.equals(""))
        email = newEmail;
    }
 
+   //set method for address
    public void setAddress(String newAddress){
     if (!newAddress.equals(""))
        address = newAddress;
    }
 
+   //set method for company
    public void setCompany(String newCompany){
     if (!newCompany.equals(""))
        company = newCompany;
    }
 
+   //method that prints the info of the contact object
    public void printInfo(){
         System.out.print("Name: " + getName() + " ");
         if (isFavorite) {
@@ -190,7 +235,8 @@ public class Contacts{
         System.out.println("Company: " + getCompany());
         System.out.println();
    }
-   
+
+   //toString() method
     public String toString(){
         return getName();
     }
