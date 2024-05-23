@@ -1,6 +1,6 @@
 import java.util.*;
 
-//Contact class
+//contact class
 public class Contacts{
     //declaring private instance variables
    private static ArrayList<Contacts> contacts = new ArrayList<Contacts>();
@@ -42,11 +42,11 @@ public class Contacts{
        //for loop to iterate through each object in the sortedContacts arraylist
        for(int i = 0; i < sortedContacts.size(); i++){
             //checking if the start of the first name is the same as the parameter name
-            if (name.length() <= sortedContacts.get(i).getFirstName().length() && sortedContacts.get(i).getFirstName().substring(0, name.length()).toLowerCase().equals(name)) {
+            if (name.length() <= sortedContacts.get(i).getFirstName().length() && sortedContacts.get(i).getFirstName().substring(0, name.length()).toLowerCase().equals(name.toLowerCase())) {
                 contactResults.add(sortedContacts.get(i));
             }
             //checking if the start of the last name is the same as the parameter name
-            else if (name.length() <= sortedContacts.get(i).getLastName().length() && sortedContacts.get(i).getLastName().substring(0, name.length()).toLowerCase().equals(name)) {
+            else if (name.length() <= sortedContacts.get(i).getLastName().length() && sortedContacts.get(i).getLastName().substring(0, name.length()).toLowerCase().equals(name.toLowerCase())) {
                 contactResults.add(sortedContacts.get(i));
             }
        }
