@@ -84,7 +84,7 @@ class UI{
                         }
                         System.out.println("Is this contact an emergency contact? (true/false)");
                         String strIsEmergency = scan.nextLine();
-                        // here it makes sure that the string written in the terminal turns into a boolean for isEmergenc
+                        // here it makes sure that the string written in the terminal turns into a boolean for isEmergency
                         if (strIsEmergency.toLowerCase().equals("true")){
                             isEmergency = true;
                         }
@@ -138,6 +138,7 @@ class UI{
                 String strIsFavorite = scan.next();
                 boolean isFavorite;
                 boolean isEmergency;
+                //Making sure that the string written in the terminal turns into a boolean for strIsFavorite
                 if (strIsFavorite.toLowerCase().equals("true")){
                     isFavorite = true;
                 }
@@ -146,6 +147,7 @@ class UI{
                 }
                 System.out.println("Is this contact an emergency contact? (true/false)");
                 String strIsEmergency = scan.next();
+                //Making sure that the string written in the terminal turns into a boolean for strIsEmergency
                 if (strIsEmergency.toLowerCase().equals("true")){
                     isEmergency = true;
                 }
@@ -154,15 +156,18 @@ class UI{
                 }
                 System.out.println("Enter the company of the contact:");
                 String company = scan.next();
+                //creating a contact with the input that the user put in
                 Contacts contact = new Contacts(firstName, lastName, phone, email, address, isFavorite, isEmergency, company);
                 System.out.println("\nContact Created: "+ contact);
             }
+            //printing out all the favorites in favorite arraylist
             else if(choice == 3){
                 System.out.println("\nHere are all of your favorite contacts:");
                 for(int i = 0; i < Contacts.getFavorites().size(); i++){
                     System.out.println((i+1)+". "+Contacts.getFavorites().get(i));
                 }
             }
+            //printing out all the emergency contacts in emergency arraylist
             else if(choice == 4){
                 System.out.println("\nHere are all of your emergency contacts:");
                 for(int i = 0; i < Contacts.getEmergency().size(); i++){
