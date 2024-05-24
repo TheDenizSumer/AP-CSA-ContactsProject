@@ -96,6 +96,7 @@ class UI{
                         }
                         System.out.println("Enter new the company of the contact:");
                         String company = scan.nextLine();
+                        // Here the values picked up in the terminal are reassigned to the variables in the "lookedAt" contact object as long as they are not hyphens
                         if (!firstName.equals("-")) lookedAt.setFirstName(firstName);
                         if (!lastName.equals("-")) lookedAt.setLastName(lastName);
                         if (!email.equals("-")) lookedAt.setEmail(email);
@@ -121,6 +122,7 @@ class UI{
                 }
             }
             else if(choice == 1){
+                // Here the program gets all of the info from the user from the terminal for a new Contact
                 System.out.println("Enter the first name of the contact:");
                 String firstName = scan.next();
                 System.out.println("Enter the last name of the contact:");
