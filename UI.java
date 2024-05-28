@@ -3,6 +3,10 @@ import java.util.*;
 class UI{
     // In the UI class we only have one function, being the main function. All other methods are stored in Contacts.java.
     public static void main(String[] args) {
+        Contacts d1 = new Contacts("joe", "thomas", "345678907654", "joe@gmail.com", "1234 Lane", true, true, "Apple");
+        Contacts d2 = new Contacts("jack", "thomas", "21089400078", "jack@gmail.com", "1234 Lane", true, true, "Apple");
+        Contacts d3 = new Contacts("adithya", "nair", "097790789089", "adithya@gmail.com", "4321 Lane", true, true, "Apple");
+        Contacts d4 = new Contacts("deniz", "sumer", "097098091989715", "deniz@gmail.com", "7612 Lane", true, true, "Apple");
         // declaring and-or initaiting variables
         boolean exitStatus = false;
         int contactNum;
